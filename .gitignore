@@ -2,3 +2,5 @@
 *.csv
 .env
 *.ipynb
+*.pyc
+__pulance__/
