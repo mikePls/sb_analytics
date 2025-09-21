@@ -37,5 +37,3 @@ app.include_router(protected)
 @app.get("/healthz")
 async def healthz():
     return {"ok": True}
-
-#curl -X POST http://127.0.0.1:8080/daily -H "Authorization: Bearer sb2025ABba" -H "Content-Type: application/json" -d '{ "date": "2025-09-05" }'
