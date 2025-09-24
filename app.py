@@ -1,4 +1,4 @@
-from fastapi import FastAPI, APIRouter, Depends, HTTPException
+from fastapi import FastAPI, APIRouter, Depends, HTTPException,CORSMiddleware
 from schemas import (
     DailyRequest,
     MonthlyRequest,
@@ -10,6 +10,19 @@ import db
 from auth import require_api_key
 
 app = FastAPI(title="Daily/Monthly KPI API", version="1.3.0")
+allowed_origins = [
+    "https://excel.officeapps.live.com",
+    "https://excel.officeapps.microsoft.com",
+    "https://sandbagltd-my.sharepoint.com"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=allowed_origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Protected router (everything here requires the API key)
 protected = APIRouter(dependencies=[Depends(require_api_key)])
