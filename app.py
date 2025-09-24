@@ -1,4 +1,5 @@
-from fastapi import FastAPI, APIRouter, Depends, HTTPException,CORSMiddleware
+from fastapi import FastAPI, APIRouter, Depends, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from schemas import (
     DailyRequest,
     MonthlyRequest,
