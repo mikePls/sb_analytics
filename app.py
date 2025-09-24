@@ -11,16 +11,10 @@ import db
 from auth import require_api_key
 
 app = FastAPI(title="Daily/Monthly KPI API", version="1.3.0")
-allowed_origins = [
-    "https://excel.officeapps.live.com",
-    "https://excel.officeapps.microsoft.com",
-    "https://sandbagltd-my.sharepoint.com"
-]
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=allowed_origins,
-    allow_credentials=True,
+    allow_origins=["*"],       # <- allow all origins
+    allow_credentials=False,   # <- must be False with "*"
     allow_methods=["*"],
     allow_headers=["*"],
 )
