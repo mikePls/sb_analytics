@@ -1,4 +1,4 @@
-from fastapi import FastAPI, APIRouter, Depends, HTTPException
+from fastapi import FastAPI, APIRouter, Depends, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from schemas import (
     DailyRequest,
@@ -18,6 +18,14 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.middleware("http")
+async def log_origin(request: Request, call_next):
+    origin = request.headers.get("origin")
+    if origin:
+        print(f"Incoming Origin: {origin}")
+    response = await call_next(request)
+    return response
 
 # Protected router (everything here requires the API key)
 protected = APIRouter(dependencies=[Depends(require_api_key)])
